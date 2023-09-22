@@ -6,6 +6,13 @@ using UnityEngine;
 
 public class playercontroller : MonoBehaviour
 {
+    public GameObject groundchecker;
+    public LayerMask whatIsGround;
+
+    public float maxSpeed = 5.0f;
+    bool isOnGround = false;
+    
+
     //Create a reference to the Rigidbody2D so we can manipulate it
     Rigidbody2D playerobject;
 
@@ -23,6 +30,8 @@ public class playercontroller : MonoBehaviour
         float movementValuex = Input.GetAxis("Horizontal");
 
         //Change the x velocity of the Rigidbody2D to be equal to the movement value 
-        playerobject.velocity = new Vector2(movementValuex, playerobject.velocity.y);
+        playerobject.velocity = new Vector2(movementValuex*50, playerobject.velocity.y);
+
+        isOnGround = Physics2D.OverlapCircle(groundchecker.transform.position, 1.0f, whatIsGround);
     }
 }
